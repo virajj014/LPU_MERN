@@ -5,13 +5,14 @@ const dotenv = require("dotenv")
 const bodyParser = require('body-parser');
 const User = require('./model/userModel');
 const bcrypt = require('bcrypt');
-
+const cors = require('cors')
 dotenv.config()
 
 
 
 require('./db.js')
 
+app.use(cors())
 
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
@@ -46,13 +47,13 @@ app.post('/register', async (req, res) => {
     // console.log(name, email, password)
 
     if (!name || !email || !password) {
-        res.json({
+        return res.json({
             message: "SOME FIELDS ARE MISSING"
         })
     }
 
     else if (password.length < 6) {
-        res.json({
+        return res.json({
             message: "PASSWORD MUST BE ATLEAST 6 CHARACTERS LONG"
         })
     }
@@ -88,13 +89,13 @@ app.post('/login', async (req, res) => {
     // console.log(name, email, password)
 
     if (!email || !password) {
-        res.json({
+        return res.json({
             message: "SOME FIELDS ARE MISSING"
         })
     }
 
     else if (password.length < 6) {
-        res.json({
+       return res.json({
             message: "PASSWORD MUST BE ATLEAST 6 CHARACTERS LONG"
         })
     }
