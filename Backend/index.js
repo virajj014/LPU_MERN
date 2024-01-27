@@ -3,11 +3,14 @@ const app = express()
 const port = 8000
 const dotenv = require("dotenv")
 const bodyParser = require('body-parser');
+const User = require('./model/userModel');
+
 dotenv.config()
 
 
 
 require('./db.js')
+
 
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
